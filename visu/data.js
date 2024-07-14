@@ -2,6 +2,7 @@ let weatherData = [];
 
 async function updateWeatherData() {
   try {
+    const event = new CustomEvent("weatherData_loaded");
     const response = await fetch(API_URL);
     if (!response.ok) {
       throw new Error("Failed to fetch weather data");
@@ -18,7 +19,9 @@ async function updateWeatherData() {
       is_day: entry.is_day,
       sunshine_duration: entry.sunshine_duration,
     }));
-    console.log("Weather data updated:", weatherData);
+
+    document.dispatchEvent(event);
+
   } catch (error) {
     console.error("Error fetching weather data:", error.message);
   }

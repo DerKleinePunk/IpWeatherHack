@@ -6,23 +6,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const windSpeedCounts = {};
   const sunshineDurationCounts = {};
 
-  weatherData.forEach((data) => {
-    const hour = new Date(data.timestamp).getHours();
-    ipCountsByHour[hour] = (ipCountsByHour[hour] || 0) + 1;
+  document.addEventListener("weatherData_loaded", () => {
+    weatherData.forEach((data) => {
+      const hour = new Date(data.timestamp).getHours();
+      ipCountsByHour[hour] = (ipCountsByHour[hour] || 0) + 1;
 
-    const temperature = data.temperature;
-    const precipitation = data.precipitation;
-    const cloudCover = data.cloud_cover;
-    const windSpeed = data.wind_speed;
-    const sunshineDuration = data.sunshine_duration;
+      const temperature = data.temperature;
+      const precipitation = data.precipitation;
+      const cloudCover = data.cloud_cover;
+      const windSpeed = data.wind_speed;
+      const sunshineDuration = data.sunshine_duration;
 
-    temperatureCounts[temperature] = (temperatureCounts[temperature] || 0) + 1;
-    precipitationCounts[precipitation] =
-      (precipitationCounts[precipitation] || 0) + 1;
-    cloudCoverCounts[cloudCover] = (cloudCoverCounts[cloudCover] || 0) + 1;
-    windSpeedCounts[windSpeed] = (windSpeedCounts[windSpeed] || 0) + 1;
-    sunshineDurationCounts[sunshineDuration] =
-      (sunshineDurationCounts[sunshineDuration] || 0) + 1;
+      temperatureCounts[temperature] =
+        (temperatureCounts[temperature] || 0) + 1;
+      precipitationCounts[precipitation] =
+        (precipitationCounts[precipitation] || 0) + 1;
+      cloudCoverCounts[cloudCover] = (cloudCoverCounts[cloudCover] || 0) + 1;
+      windSpeedCounts[windSpeed] = (windSpeedCounts[windSpeed] || 0) + 1;
+      sunshineDurationCounts[sunshineDuration] =
+        (sunshineDurationCounts[sunshineDuration] || 0) + 1;
+    });
   });
 
   const createChart = (
