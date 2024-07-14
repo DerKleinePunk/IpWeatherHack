@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const precipitationCounts = {};
   const cloudCoverCounts = {};
   const windSpeedCounts = {};
-  const sunshineDurationCounts = {};
+  const dayNightCounts = { "Tag": 0, "Nacht": 0 };
 
   document.addEventListener("weatherData_loaded", () => {
     weatherData.forEach((data) => {
@@ -16,40 +16,28 @@ document.addEventListener("DOMContentLoaded", () => {
       const precipitation = Math.round(data.precipitation);
       const cloudCover = Math.round(data.cloud_cover);
       const windSpeed = Math.round(data.wind_speed);
-      const sunshineDuration = Math.round(data.sunshine_duration / 3600);
+      const sunshineDuration = data.sunshine_duration > 0 ? "Tag" : "Nacht";
 
-      temperatureCounts[temperature] =
-        (temperatureCounts[temperature] || 0) + 1;
-      precipitationCounts[precipitation] =
-        (precipitationCounts[precipitation] || 0) + 1;
+      temperatureCounts[temperature] = (temperatureCounts[temperature] || 0) + 1;
+      precipitationCounts[precipitation] = (precipitationCounts[precipitation] || 0) + 1;
       cloudCoverCounts[cloudCover] = (cloudCoverCounts[cloudCover] || 0) + 1;
       windSpeedCounts[windSpeed] = (windSpeedCounts[windSpeed] || 0) + 1;
-      sunshineDurationCounts[sunshineDuration] =
-        (sunshineDurationCounts[sunshineDuration] || 0) + 1;
+      dayNightCounts[sunshineDuration] = (dayNightCounts[sunshineDuration] || 0) + 1;
     });
 
-    const createChart = (
-      ctx,
-      labels,
-      data,
-      label,
-      backgroundColor,
-      borderColor
-    ) => {
+    const createChart = (ctx, labels, data, label, backgroundColor, borderColor) => {
       if (ctx) {
         return new Chart(ctx, {
           type: "bar",
           data: {
             labels: labels,
-            datasets: [
-              {
-                label: label,
-                data: data,
-                backgroundColor: backgroundColor,
-                borderColor: borderColor,
-                borderWidth: 1,
-              },
-            ],
+            datasets: [{
+              label: label,
+              data: data,
+              backgroundColor: backgroundColor,
+              borderColor: borderColor,
+              borderWidth: 1,
+            }],
           },
           options: {
             responsive: true,
@@ -83,30 +71,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const labelsHour = Object.keys(ipCountsByHour).map((hour) => `${hour}:00`);
     const dataHour = Object.values(ipCountsByHour);
 
-    const labelsTemperature = Object.keys(temperatureCounts).map(
-      (temp) => `${temp}°C`
-    );
+    const labelsTemperature = Object.keys(temperatureCounts).map((temp) => `${temp}°C`);
     const dataTemperature = Object.values(temperatureCounts);
 
-    const labelsPrecipitation = Object.keys(precipitationCounts).map(
-      (prec) => `${prec}mm`
-    );
+    const labelsPrecipitation = Object.keys(precipitationCounts).map((prec) => `${prec}mm`);
     const dataPrecipitation = Object.values(precipitationCounts);
 
-    const labelsCloudCover = Object.keys(cloudCoverCounts).map(
-      (cloud) => `${cloud}%`
-    );
+    const labelsCloudCover = Object.keys(cloudCoverCounts).map((cloud) => `${cloud}%`);
     const dataCloudCover = Object.values(cloudCoverCounts);
 
-    const labelsWindSpeed = Object.keys(windSpeedCounts).map(
-      (speed) => `${speed}m/s`
-    );
+    const labelsWindSpeed = Object.keys(windSpeedCounts).map((speed) => `${speed}m/s`);
     const dataWindSpeed = Object.values(windSpeedCounts);
 
-    const labelsSunshineDuration = Object.keys(sunshineDurationCounts).map(
-      (duration) => `${duration}h`
-    );
-    const dataSunshineDuration = Object.values(sunshineDurationCounts);
+    const labelsDayNight = Object.keys(dayNightCounts);
+    const dataDayNight = Object.values(dayNightCounts);
 
     createChart(
       document.getElementById("ipCountChart").getContext("2d"),
@@ -149,10 +127,10 @@ document.addEventListener("DOMContentLoaded", () => {
       "rgba(255, 159, 64, 1)"
     );
     createChart(
-      document.getElementById("sunshineDurationIpChart").getContext("2d"),
-      labelsSunshineDuration,
-      dataSunshineDuration,
-      "Anzahl der IPs bei verschiedenen Sonnenscheindauern",
+      document.getElementById("dayNightIpChart").getContext("2d"),
+      labelsDayNight,
+      dataDayNight,
+      "Anzahl der IPs bei Tag und Nacht",
       "rgba(255, 206, 86, 0.2)",
       "rgba(255, 206, 86, 1)"
     );
