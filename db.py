@@ -42,12 +42,12 @@ class DBHandler:
             ip,
             latitude,
             longitude,
-            weather_data['hourly'][0]['temperature_2m'],
-            weather_data['hourly'][0]['precipitation'],
-            weather_data['hourly'][0]['cloud_cover'],
-            weather_data['hourly'][0]['wind_speed_10m'],
-            weather_data['hourly'][0]['is_day'],
-            weather_data['hourly'][0]['sunshine_duration']
+            weather_data['hourly']['temperature_2m'][0],
+            weather_data['hourly']['precipitation'][0],
+            weather_data['hourly']['cloud_cover'][0],
+            weather_data['hourly']['wind_speed_10m'][0],
+            weather_data['hourly']['is_day'][0],
+            weather_data['hourly']['sunshine_duration'][0]
         )
         self.db_cursor.execute(sql, values)
         self.db_connection.commit()
