@@ -1,1 +1,1 @@
-export const API_URL = "http://blabla";
+const API_URL = "http://blabla";
