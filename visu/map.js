@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("weatherData_loaded", () => {
-    const map = L.map("map").setView([52.52, 13.41], 13);
+    const map = L.map("map").setView([52.52, 13.41], 40);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
