@@ -42,6 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
       borderColor
     ) => {
       if (ctx) {
+        if (ctx.chart) {
+          ctx.chart.destroy();
+        }
         return new Chart(ctx, {
           type: "bar",
           data: {
