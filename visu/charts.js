@@ -20,13 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const precipitation = Math.round(data.precipitation);
       const cloudCover = Math.round(data.cloud_cover);
       const windSpeed = Math.round(data.wind_speed);
-      const sunshineDuration = Math.round(data.sunshine_duration / 3600) > 0 ? "Tag" : "Nacht";
+      const sunshineDuration =
+        Math.round(data.sunshine_duration / 3600) > 0 ? "Tag" : "Nacht";
 
-      temperatureCounts[temperature] = (temperatureCounts[temperature] || 0) + 1;
-      precipitationCounts[precipitation] = (precipitationCounts[precipitation] || 0) + 1;
+      temperatureCounts[temperature] =
+        (temperatureCounts[temperature] || 0) + 1;
+      precipitationCounts[precipitation] =
+        (precipitationCounts[precipitation] || 0) + 1;
       cloudCoverCounts[cloudCover] = (cloudCoverCounts[cloudCover] || 0) + 1;
       windSpeedCounts[windSpeed] = (windSpeedCounts[windSpeed] || 0) + 1;
-      sunshineDurationCounts[sunshineDuration] = (sunshineDurationCounts[sunshineDuration] || 0) + 1;
+      sunshineDurationCounts[sunshineDuration] =
+        (sunshineDurationCounts[sunshineDuration] || 0) + 1;
     });
 
     const createChart = (
