@@ -8,14 +8,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("weatherData_loaded", () => {
     weatherData.forEach((data) => {
-      const hour = new Date(data.timestamp).getHours();
+      const timestamp = new Date(data.timestamp);
+      const hour = timestamp.getHours();
       ipCountsByHour[hour] = (ipCountsByHour[hour] || 0) + 1;
 
       const temperature = Math.round(data.temperature);
       const precipitation = Math.round(data.precipitation);
-      const cloudCover = Math.round(data.cloud_cover * 100);
+      const cloudCover = Math.round(data.cloud_cover);
       const windSpeed = Math.round(data.wind_speed);
-      const sunshineDuration = Math.round(data.sunshine_duration);
+      const sunshineDuration = Math.round(data.sunshine_duration / 3600);
 
       temperatureCounts[temperature] =
         (temperatureCounts[temperature] || 0) + 1;
