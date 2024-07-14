@@ -50,9 +50,13 @@ Um die Anwendung mit einer Datenbank zu verbinden, muss eine `.env`-Datei erstel
     DB_USER=your_database_username
     DB_PASSWORD=your_database_password
     DB_DATABASE=weather_db
+    HOST=127.0.0.1
+    PORT=57080
     ```
 
     Stelle sicher, dass du die Werte für `DB_HOST`, `DB_USER`, `DB_PASSWORD` und `DB_DATABASE` entsprechend deiner Umgebung und Konfiguration änderst.
+    HOST Ip auf dem der flask Server hört
+    PORT auf dem der flask Server hört
 
 
 ## Setzen der `environment.js`
