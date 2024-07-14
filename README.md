@@ -1,5 +1,12 @@
-Dies ist das all_weather_data Objekt welches beim /api/weather_data aufruf zurück kommt.
+# Wetterdaten-API
 
+Die Wetterdaten-API ermöglicht es, Wetterinformationen basierend auf IP-Adressen abzurufen und zu speichern.
+
+## `all_weather_data` Objekt
+
+Beim Aufruf der Route `/api/weather_data` wird ein JSON-Array zurückgegeben, das alle gespeicherten Wetterdaten für verschiedene IP-Adressen enthält. Das Format des `all_weather_data`-Objekts ist wie folgt:
+
+```json
 [
     {
         "ip": "EXAMPLE_IP",
@@ -24,10 +31,25 @@ Dies ist das all_weather_data Objekt welches beim /api/weather_data aufruf zurü
         "sunshine_duration": 3.8
     }
 ]
+```
 
+## Setzen der `.env`
 
-#Setzen der .env
+Um die Anwendung mit einer Datenbank zu verbinden, muss eine `.env`-Datei erstellt werden:
 
-Kopieren example.env
-umbenennen in .env
-credentials ändern
+1. Kopiere `example.env` und benenne die Kopie in `.env` um:
+
+    ```bash
+    cp example.env .env
+    ```
+
+2. Bearbeite die `.env`-Datei und setze die erforderlichen Credentials für die Datenbankverbindung und andere Einstellungen:
+
+    ```dotenv
+    DB_HOST=localhost
+    DB_USER=your_database_username
+    DB_PASSWORD=your_database_password
+    DB_DATABASE=weather_db
+    ```
+
+    Stelle sicher, dass du die Werte für `DB_HOST`, `DB_USER`, `DB_PASSWORD` und `DB_DATABASE` entsprechend deiner Umgebung und Konfiguration änderst.
