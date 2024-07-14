@@ -1,5 +1,3 @@
-import { API_URL } from "./config.js";
-
 let weatherData = [];
 
 async function updateWeatherData() {
