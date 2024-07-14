@@ -9,3 +9,7 @@
 # Ignore all files with the specified name.
 # Scope is all repo folders.
 **/__pycache__
+
+# Ignore all files with the specified name.
+# Scope is all repo folders.
+environment.js

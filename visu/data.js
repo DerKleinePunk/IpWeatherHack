@@ -1,8 +1,10 @@
+import { API_URL } from "./config.js";
+
 let weatherData = [];
 
 async function updateWeatherData() {
   try {
-    const response = await fetch("API");
+    const response = await fetch(API_URL);
     if (!response.ok) {
       throw new Error("Failed to fetch weather data");
     }

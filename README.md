@@ -53,3 +53,20 @@ Um die Anwendung mit einer Datenbank zu verbinden, muss eine `.env`-Datei erstel
     ```
 
     Stelle sicher, dass du die Werte für `DB_HOST`, `DB_USER`, `DB_PASSWORD` und `DB_DATABASE` entsprechend deiner Umgebung und Konfiguration änderst.
+
+
+## Setzen der `enviroment.js`
+
+Um die Anwendung mit dem Backend zu verbinden, muss eine `enviroment.js-Datei erstellt werden:
+
+1. Kopiere `example-enviroment.js` und benenne die Kopie in `enviroment.js` um:
+
+    ```bash
+    cp example-enviroment.js enviroment.js
+    ```
+
+2. Bearbeite die `enviroment.js`-Datei und setze die erforderliche URL:
+
+    ```dotenv
+    API_URL = 'https://api.example.com/weather'
+    ```
