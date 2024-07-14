@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const dataWindSpeed = Object.values(windSpeedCounts);
 
     const labelsSunshineDuration = Object.keys(sunshineDurationCounts).map(
-      (duration) => `${duration}h`
+      (duration) => `${duration}`
     );
     const dataSunshineDuration = Object.values(sunshineDurationCounts);
 
