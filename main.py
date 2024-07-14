@@ -1,10 +1,12 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 import requests
 from db import DBHandler
 from dotenv import load_dotenv
 import os
 
 app = Flask(__name__)
+CORS(app)
 db_handler = DBHandler()
 load_dotenv()
 
