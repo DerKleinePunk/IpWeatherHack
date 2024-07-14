@@ -11,11 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const hour = new Date(data.timestamp).getHours();
       ipCountsByHour[hour] = (ipCountsByHour[hour] || 0) + 1;
 
-      const temperature = data.temperature;
-      const precipitation = data.precipitation;
-      const cloudCover = data.cloud_cover;
-      const windSpeed = data.wind_speed;
-      const sunshineDuration = data.sunshine_duration;
+      const temperature = Math.round(data.temperature);
+      const precipitation = Math.round(data.precipitation);
+      const cloudCover = Math.round(data.cloud_cover * 100);
+      const windSpeed = Math.round(data.wind_speed);
+      const sunshineDuration = Math.round(data.sunshine_duration);
 
       temperatureCounts[temperature] =
         (temperatureCounts[temperature] || 0) + 1;
@@ -78,35 +78,35 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     };
-  
+
     const labelsHour = Object.keys(ipCountsByHour).map((hour) => `${hour}:00`);
     const dataHour = Object.values(ipCountsByHour);
-  
+
     const labelsTemperature = Object.keys(temperatureCounts).map(
       (temp) => `${temp}°C`
     );
     const dataTemperature = Object.values(temperatureCounts);
-  
+
     const labelsPrecipitation = Object.keys(precipitationCounts).map(
       (prec) => `${prec}mm`
     );
     const dataPrecipitation = Object.values(precipitationCounts);
-  
+
     const labelsCloudCover = Object.keys(cloudCoverCounts).map(
-      (cloud) => `${cloud * 100}%`
+      (cloud) => `${cloud}%`
     );
     const dataCloudCover = Object.values(cloudCoverCounts);
-  
+
     const labelsWindSpeed = Object.keys(windSpeedCounts).map(
       (speed) => `${speed}m/s`
     );
     const dataWindSpeed = Object.values(windSpeedCounts);
-  
+
     const labelsSunshineDuration = Object.keys(sunshineDurationCounts).map(
       (duration) => `${duration}h`
     );
     const dataSunshineDuration = Object.values(sunshineDurationCounts);
-  
+
     createChart(
       document.getElementById("ipCountChart").getContext("2d"),
       labelsHour,
@@ -156,6 +156,4 @@ document.addEventListener("DOMContentLoaded", () => {
       "rgba(255, 206, 86, 1)"
     );
   });
-
-  
 });
