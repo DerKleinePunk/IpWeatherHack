@@ -1,9 +1,12 @@
 from flask import Flask, jsonify
 import requests
 from db import DBHandler
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
 db_handler = DBHandler()
+load_dotenv()
 
 def get_coordinates_from_ip(ip):
     url = f"http://ip-api.com/json/{ip}"
@@ -39,4 +42,4 @@ def weather_data():
     return jsonify(all_weather_data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host=os.getenv('HOST'), port=os.getenv('PORT'), debug=True)
