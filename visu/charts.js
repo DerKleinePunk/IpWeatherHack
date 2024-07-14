@@ -8,17 +8,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("weatherData_loaded", () => {
     weatherData.forEach((data) => {
-      // Stunde aus Timestamp extrahieren
       const timestamp = new Date(data.timestamp);
       const hour = timestamp.getHours();
       ipCountsByHour[hour] = (ipCountsByHour[hour] || 0) + 1;
 
-      // Temperatur, Niederschlag, Wolkendecke, Windgeschwindigkeit und Sonnenscheindauer
       const temperature = Math.round(data.temperature);
       const precipitation = Math.round(data.precipitation);
-      const cloudCover = Math.round(data.cloud_cover); // Als Prozentwert (0-100)
+      const cloudCover = Math.round(data.cloud_cover);
       const windSpeed = Math.round(data.wind_speed);
-      const sunshineDuration = Math.round(data.sunshine_duration / 3600); // Umrechnung von Sekunden in Stunden
+      const sunshineDuration = Math.round(data.sunshine_duration / 3600) > 0 ? "Tag" : "Nacht";
 
       temperatureCounts[temperature] =
         (temperatureCounts[temperature] || 0) + 1;
