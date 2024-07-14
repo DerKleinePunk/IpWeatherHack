@@ -22,13 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    const maxCount = Math.max(
-      ...Object.values(ipCountsByLocation).map((loc) => loc.count)
-    );
-    const radiusScaleFactor = 1000;
+    const maxCount = Math.max(...Object.values(ipCountsByLocation).map(loc => loc.count));
+    const maxRadius = 2000;
 
     Object.values(ipCountsByLocation).forEach((location) => {
-      const radius = Math.sqrt(location.count / maxCount) * radiusScaleFactor;
+      const radius = (location.count / maxCount) * maxRadius;
 
       L.circle([location.latitude, location.longitude], {
         color: "red",

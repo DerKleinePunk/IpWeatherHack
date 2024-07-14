@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const precipitation = Math.round(data.precipitation);
       const cloudCover = Math.round(data.cloud_cover);
       const windSpeed = Math.round(data.wind_speed);
-      const sunshineDuration = data.sunshine_duration > 0 ? "Tag" : "Nacht";
+      const sunshineDuration = data.sunshine_duration;
 
       temperatureCounts[temperature] = (temperatureCounts[temperature] || 0) + 1;
       precipitationCounts[precipitation] = (precipitationCounts[precipitation] || 0) + 1;
