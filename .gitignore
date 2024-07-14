@@ -1,3 +1,11 @@
 # Ignore all files with the specified name.
 # Scope is all repo folders.
 .env
+
+# Ignore all files with the specified name.
+# Scope is all repo folders.
+.venv
+
+# Ignore all files with the specified name.
+# Scope is all repo folders.
+/__pycache__
