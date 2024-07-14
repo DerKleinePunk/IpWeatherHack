@@ -6,7 +6,6 @@ load_dotenv()
 
 class DBHandler:
     def __init__(self):
-
         self.db_connection = mysql.connector.connect(
             host=os.getenv('DB_HOST'),
             user=os.getenv('DB_USER'),
@@ -15,7 +14,7 @@ class DBHandler:
         )
         self.db_cursor = self.db_connection.cursor()
 
-        # wenn keiner existet
+        # Create table with timestamp
         self.db_cursor.execute("""
             CREATE TABLE IF NOT EXISTS weather_data (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -27,17 +26,17 @@ class DBHandler:
                 cloud_cover FLOAT,
                 wind_speed FLOAT,
                 is_day BOOLEAN,
-                sunshine_duration FLOAT
+                sunshine_duration FLOAT,
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         """)
         self.db_connection.commit()
 
     def save_weather_data(self, ip, latitude, longitude, weather_data):
         sql = """
-            INSERT INTO weather_data (ip, latitude, longitude, temperature, precipitation, cloud_cover, wind_speed, is_day, sunshine_duration)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO weather_data (ip, latitude, longitude, temperature, precipitation, cloud_cover, wind_speed, is_day, sunshine_duration, timestamp)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
         """
-    
         values = (
             ip,
             latitude,
@@ -67,7 +66,8 @@ class DBHandler:
                 'cloud_cover': float(row[6]),
                 'wind_speed': float(row[7]),
                 'is_day': bool(row[8]),
-                'sunshine_duration': float(row[9])
+                'sunshine_duration': float(row[9]),
+                'timestamp': row[10].isoformat()  
             }
             weather_data_list.append(weather_data)
 
