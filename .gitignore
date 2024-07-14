@@ -8,4 +8,4 @@
 
 # Ignore all files with the specified name.
 # Scope is all repo folders.
-/__pycache__
+**/__pycache__
