@@ -1,0 +1,11 @@
+#map {
+  height: 400px;
+}
+
+.chart-container {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
