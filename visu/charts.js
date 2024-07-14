@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const sunshineDurationCounts = {};
 
   document.addEventListener("weatherData_loaded", () => {
+    for (let i = 0; i < 24; i++) {
+      ipCountsByHour[i] = 0;
+    }
+
     weatherData.forEach((data) => {
       const timestamp = new Date(data.timestamp);
       const hour = timestamp.getHours();
@@ -18,14 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const windSpeed = Math.round(data.wind_speed);
       const sunshineDuration = Math.round(data.sunshine_duration / 3600) > 0 ? "Tag" : "Nacht";
 
-      temperatureCounts[temperature] =
-        (temperatureCounts[temperature] || 0) + 1;
-      precipitationCounts[precipitation] =
-        (precipitationCounts[precipitation] || 0) + 1;
+      temperatureCounts[temperature] = (temperatureCounts[temperature] || 0) + 1;
+      precipitationCounts[precipitation] = (precipitationCounts[precipitation] || 0) + 1;
       cloudCoverCounts[cloudCover] = (cloudCoverCounts[cloudCover] || 0) + 1;
       windSpeedCounts[windSpeed] = (windSpeedCounts[windSpeed] || 0) + 1;
-      sunshineDurationCounts[sunshineDuration] =
-        (sunshineDurationCounts[sunshineDuration] || 0) + 1;
+      sunshineDurationCounts[sunshineDuration] = (sunshineDurationCounts[sunshineDuration] || 0) + 1;
     });
 
     const createChart = (
@@ -80,8 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    const labelsHour = Object.keys(ipCountsByHour).map((hour) => `${hour}:00`);
-    const dataHour = Object.values(ipCountsByHour);
+    const labelsHour = Array.from({ length: 24 }, (_, i) => `${i}:00`);
+    const dataHour = Array.from({ length: 24 }, (_, i) => ipCountsByHour[i]);
 
     const labelsTemperature = Object.keys(temperatureCounts).map(
       (temp) => `${temp}°C`

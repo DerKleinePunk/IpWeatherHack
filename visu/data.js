@@ -18,6 +18,7 @@ async function updateWeatherData() {
       wind_speed: entry.wind_speed,
       is_day: entry.is_day,
       sunshine_duration: entry.sunshine_duration,
+      timestamp: entry.timestamp
     }));
 
     document.dispatchEvent(event);
